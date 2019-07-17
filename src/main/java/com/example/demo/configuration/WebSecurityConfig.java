@@ -1,4 +1,4 @@
-package com.example.demo.Configurations;
+package com.example.demo.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .withUser("chathura")
                 .password(passwordEncoder().encode("chathura"))
-                .roles("CHATHURA").authorities("admin");
+                .roles("CHATHURA");
     }
 
 
@@ -37,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user").permitAll()
                 .antMatchers("/admin").authenticated()
                 .antMatchers("/role").hasAuthority("admin")
+                .antMatchers("/getuser").hasRole("ADMIN")
                 .and()
                 .httpBasic();
 
